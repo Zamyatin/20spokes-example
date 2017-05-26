@@ -9,37 +9,26 @@ class ContactForm extends React.Component {
       message: ''
     }
 
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleMessageChange = this.handleMessageChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   displayName: "ContactForm"
 
-  // Figure out how to DRY this up with Computed properties (or whatever
-  // the React equivalent is... These aren't purty.)
+  handleInputChange(e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
 
-  handleFirstNameChange(e) {
-    this.setState({firstName: e.target.value})
+    // use some ES6 computed property syntax here:
+    this.setState({
+      [name]: value
+    });
   }
 
-  handleLastNameChange(e) {
-    this.setState({lastName: e.target.value})
-  }
-
-  handleEmailChange(e) {
-    this.setState({email: e.target.value})
-  }
-
-  handleMessageChange(e) {
-    this.setState({message: e.target.value})
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    console.warn('submit has been triggered');
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log('this thing has been submitted');
+    // build your request to the api...
   }
 
   render() {
@@ -50,41 +39,45 @@ class ContactForm extends React.Component {
             <div className='form-group col-sm-4'>
               <label>First Name:</label>
               <input
+                name='firstName'
                 type='text'
                 className='form-control'
                 value={ this.state.firstName }
                 placeholder='First Name'
-                onChange={ this.handleFirstNameChange }>
+                onChange={ this.handleInputChange }>
               </input>
             </div>
             <div className='form-group col-sm-4'>
               <label>Last Name:</label>
               <input
+                name='lastName'
                 type='text'
                 className='form-control'
                 value={ this.state.lastName }
                 placeholder='Last Name'
-                onChange={ this.handleLastNameChange }>
+                onChange={ this.handleInputChange }>
               </input>
             </div>
             <div className='form-group col-sm-4'>
               <label>Email:</label>
               <input
+                name='email'
                 type='text'
                 className='form-control'
                 value={ this.state.email }
                 placeholder='Email Address'
-                onChange={ this.handleEmailChange }>
+                onChange={ this.handleInputChange }>
               </input>
             </div>
             <div className='form-group col-sm-12'>
               <label>Tell us something nice!</label>
               <textarea
+                name='message'
                 type='text'
                 className='form-control'
                 value={ this.state.message }
                 placeholder='Send us your love!'
-                onChange={ this.handleMessageChange }>
+                onChange={ this.handleInputChange }>
               </textarea>
             </div>
             <div className='col-sm-4 actions'>
