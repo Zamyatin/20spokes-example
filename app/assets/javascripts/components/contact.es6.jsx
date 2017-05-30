@@ -9,6 +9,7 @@ class ContactForm extends React.Component {
       message: ''
     }
 
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -27,8 +28,20 @@ class ContactForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('this thing has been submitted');
-    // build your request to the api...
+
+    let package = {
+      first_name: this.state.firstName,
+      last_name: this.state.lastName,
+      email: this.state.email,
+      message: this.state.message
+    };
+
+    $.ajax({
+      type: 'POST',
+      url:'/contact',
+      data: package,
+      dataType: 'json'
+    })
   }
 
   render() {
