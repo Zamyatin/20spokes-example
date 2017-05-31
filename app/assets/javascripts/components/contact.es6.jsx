@@ -32,10 +32,12 @@ class ContactForm extends React.Component {
     e.preventDefault();
 
     let data = {
-      first_name: this.state.firstName,
-      last_name: this.state.lastName,
-      email: this.state.email,
-      message: this.state.message
+      contact: {
+        first_name: this.state.firstName,
+        last_name: this.state.lastName,
+        email: this.state.email,
+        message: this.state.message
+      }
     };
 
     $.ajax({
