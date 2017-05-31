@@ -1,3 +1,10 @@
+const fieldValidations = [
+  validationRunner('firstName', 'First Name', FormValidator.required),
+  validationRunner('lastName', 'Last Name', FormValidator.required),
+  validationRunner('email', 'Email Address', FormValidator.required),
+  validationRunner('email', 'Email Address', FormValidator.validateEmail),
+  validationRunner('message', 'Message', FormValidator.required)
+]
 class ContactForm extends React.Component {
   constructor(props) {
     super(props);
@@ -6,8 +13,12 @@ class ContactForm extends React.Component {
       firstName: '',
       lastName: '',
       email: '',
-      message: ''
+      message: '',
+      showErrors: false,
+      validationErrors: {}
     }
+    // run validations on initial state
+    this.state.validationErrors = runValidations(this.state, fieldValidations);
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -20,10 +31,17 @@ class ContactForm extends React.Component {
     const value = target.value;
     const name = target.name;
 
-    // use some ES6 computed property syntax here:
-    this.setState({
-      [name]: value
+    // we want to compare a comprehensive new state against validations,
+    // which means we need a way to copy state, update, and validate before
+    // finalizing with a setState statement
+    let newState = update(this.state, {
+      [name]: { $set: value }
     });
+
+    newState.validationErrors = runValidations(newState, fieldValidations)
+
+    // use some ES6 computed property syntax here:
+    this.setState(newState)
   }
 
   handleSubmit(e) {
@@ -57,6 +75,7 @@ class ContactForm extends React.Component {
                 className='form-control'
                 value={ this.state.firstName }
                 placeholder='First Name'
+                showErrors={ this.state.showErrors}
                 onChange={ this.handleInputChange }>
               </input>
             </div>
@@ -107,5 +126,6 @@ ContactForm.propTypes = {
   firstName: React.PropTypes.string,
   lastName: React.PropTypes.string,
   email: React.PropTypes.string,
-  message: React.PropTypes.string
+  message: React.PropTypes.string,
+  showErrors: React.PropTypes.bool
 };
