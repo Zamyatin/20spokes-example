@@ -106,7 +106,7 @@ class ContactForm extends React.Component {
           placeholder='turkey@wrapitinbacon.com'
           onChange={ this.handleInputChange }>
         </input>
-        { (!this.validEmailFormat())
+        { (!this.validEmailFormat() && this.state.email !== '')
           ? <div><span>Valid email format required.</span></div>
           : null
         }
