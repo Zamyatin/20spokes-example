@@ -31,3 +31,5 @@ npm-debug.log
 scratch.txt
 
 public/system/
+/public/packs
+/node_modules
