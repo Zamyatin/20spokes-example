@@ -5,7 +5,8 @@
     %title 20spokes - A Chicago Web Development Agency
     -# IN USE FOR CLIENT INFO = stylesheet_link_tag    '/assets/style.css', media: 'all'
     = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
+    = javascript_include_tag 'application' # keep this until fully migrated from asset pipeline
+    = javascript_pack_tag 'application' # webpacker application include
     = csrf_meta_tags
 
     %link{ href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600|Archivo+Narrow:400,700", rel: "stylesheet", type: "text/css"}
@@ -22,4 +23,3 @@
     #root
     = render 'shared/nav'
     = yield
-    -# USE WHEN SETTING FROM WEBPACK= javascript_include_tag '/assets/bundle.min.js'
