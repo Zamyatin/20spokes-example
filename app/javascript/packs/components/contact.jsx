@@ -1,4 +1,8 @@
-class ContactForm extends React.Component {
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+
+class ContactForm extends Component {
   constructor(props) {
     super(props);
 
@@ -171,9 +175,11 @@ class ContactForm extends React.Component {
 }
 
 ContactForm.propTypes = {
-  firstName: React.PropTypes.string,
-  lastName: React.PropTypes.string,
-  email: React.PropTypes.string,
-  message: React.PropTypes.string,
-  dataSubmitted: React.PropTypes.bool
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  email: PropTypes.string,
+  message: PropTypes.string,
+  dataSubmitted: PropTypes.bool
 };
+
+export default ContactForm

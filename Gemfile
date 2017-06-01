@@ -11,7 +11,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem "haml-rails", "~> 0.9"
 gem 'jquery-rails'
 
-gem 'react-rails'
+gem 'webpacker', '~> 2.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'quiet_assets', group: :development
 
